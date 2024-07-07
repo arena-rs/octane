@@ -3,7 +3,6 @@
 
 use std::{fmt::Debug, pin::Pin, sync::Arc};
 
-use alloy::{network::EthereumWallet, providers::Provider, transports::BoxTransport};
 use anyhow::Result;
 use futures_util::{Stream, StreamExt};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
@@ -22,8 +21,6 @@ use super::*;
 ///
 /// * `E`: The type of the items in the stream.
 pub type EventStream<E> = Pin<Box<dyn Stream<Item = E> + Send + Sync>>;
-
-pub type AnvilProvider = dyn Provider<EthereumWallet, BoxTransport>;
 
 /// The instructions that can be sent to a [`StateMachine`].
 #[derive(Clone)]
