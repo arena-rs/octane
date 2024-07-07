@@ -153,7 +153,7 @@ impl AgentBuilder {
         self,
         client: Arc<AnvilProvider>,
         messager: Messager,
-    ) -> Result<Agent, ArbiterEngineError> {
+    ) -> Result<Agent, OctaneError> {
         match self.behavior_engines {
             Some(engines) => Ok(Agent {
                 id: self.id,
@@ -161,7 +161,7 @@ impl AgentBuilder {
                 client,
                 behavior_engines: engines,
             }),
-            None => Err(ArbiterEngineError::AgentBuildError(
+            None => Err(OctaneError::AgentBuildError(
                 "Missing behavior engines".to_owned(),
             )),
         }

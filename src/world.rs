@@ -125,11 +125,11 @@ impl World {
     /// Returns an error if no agents are found in the world, possibly
     /// indicating that the world has already been run or that no agents
     /// were added prior to execution.
-    pub async fn run(&mut self) -> Result<&AnvilInstance, ArbiterEngineError> {
+    pub async fn run(&mut self) -> Result<&AnvilInstance, OctaneError> {
         let agents = match self.agents.take() {
             Some(agents) => agents,
             None => {
-                return Err(ArbiterEngineError::WorldError(
+                return Err(OctaneError::WorldError(
                     "No agents found. Has the world already been ran?".to_owned(),
                 ))
             }

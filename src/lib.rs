@@ -11,7 +11,7 @@ use alloy::providers::fillers::JoinFill;
 use alloy::providers::fillers::WalletFiller;
 use alloy::network::Ethereum;
 use alloy::transports::http::Http;
-use crate::{error::ArbiterEngineError, messenger::Messager};
+use crate::{error::OctaneError, messenger::Messager};
 
 pub mod error;
 pub mod machine;
