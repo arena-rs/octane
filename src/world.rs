@@ -1,14 +1,16 @@
 //! The world module contains the core world abstraction for the Arbiter Engine.
 
-use std::collections::VecDeque;
+use std::{
+    collections::{HashMap, VecDeque},
+    sync::Arc,
+};
 
+use alloy::{
+    node_bindings::{Anvil, AnvilInstance},
+    providers::ProviderBuilder,
+    signers::local::PrivateKeySigner,
+};
 use futures_util::future::join_all;
-use alloy::node_bindings::{Anvil, AnvilInstance};
-use alloy::providers::ProviderBuilder;
-use std::sync::Arc;
-use std::collections::HashMap;
-use alloy::signers::local::PrivateKeySigner;
-
 use tokio::spawn;
 
 use super::*;
@@ -94,8 +96,10 @@ impl World {
 
         // Create a provider with the wallet.
         let rpc_url = self.environment.endpoint().parse().unwrap();
-        let client =
-            ProviderBuilder::new().wallet(wallet).on_http(rpc_url);
+        let client = ProviderBuilder::new()
+            .with_recommended_fillers()
+            .wallet(wallet)
+            .on_http(rpc_url);
 
         let messager = self.messager.for_agent(&id);
 
