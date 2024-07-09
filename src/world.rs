@@ -41,6 +41,9 @@ pub struct World {
 
     /// The messaging layer for the world.
     pub messager: Messager,
+
+    /// Current private key to assign to new agents.
+    pub signer_idx: usize,
 }
 
 impl World {
@@ -58,6 +61,7 @@ impl World {
             agents: Some(HashMap::new()),
             environment: anvil,
             messager: Messager::new(),
+            signer_idx: 0,
         }
     }
 
@@ -90,8 +94,10 @@ impl World {
     pub fn add_agent(&mut self, agent_builder: AgentBuilder) {
         let id = agent_builder.id.clone();
 
-        // Set up signer from the first default Anvil account (Alice).
-        let signer: PrivateKeySigner = self.environment.keys()[0].clone().into();
+        let signer: PrivateKeySigner = self.environment.keys()[self.signer_idx].clone().into();
+
+        self.signer_idx += 1;
+
         let wallet = EthereumWallet::from(signer);
 
         // Create a provider with the wallet.
