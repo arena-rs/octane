@@ -55,7 +55,8 @@ impl World {
             .port(port)
             .mnemonic("abstract vacuum mammal awkward pudding scene penalty purchase dinner depart evoke puzzle")
             .args(vec!["--hardfork", "cancun"])
-            .args(vec!["--silent", "false"])
+            .args(vec!["--no-mining"])
+            .args(vec!["--steps-tracing"])
             .spawn();
 
         Self {
