@@ -55,6 +55,7 @@ impl World {
             .port(port)
             .mnemonic("abstract vacuum mammal awkward pudding scene penalty purchase dinner depart evoke puzzle")
             .args(vec!["--hardfork", "cancun"])
+            .args(vec!["--verbosity", "5"])
             .spawn();
 
         Self {
