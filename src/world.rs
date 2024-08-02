@@ -54,6 +54,7 @@ impl World {
         let anvil = Anvil::new()
             .port(port)
             .mnemonic("abstract vacuum mammal awkward pudding scene penalty purchase dinner depart evoke puzzle")
+            .args(vec!["--hardfork", "cancun"])
             .spawn();
 
         Self {
