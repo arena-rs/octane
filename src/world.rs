@@ -98,6 +98,8 @@ impl World {
 
         let signer: PrivateKeySigner = self.environment.keys()[self.signer_idx].clone().into();
 
+        self.signer_idx += 1;
+
         let wallet = EthereumWallet::from(signer);
 
         // Create a provider with the wallet.
